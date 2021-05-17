@@ -4,10 +4,16 @@ import time
 import pyscreenshot
 import pytesseract
 import keyboard
+import winsound
 
-pytesseract.pytesseract.tesseract_cmd = r'C:\Program Files\Tesseract-OCR\tesseract.exe'
+pytesseract.pytesseract.tesseract_cmd = r'E:\tesseract\tesseract.exe'
 #getting the area for the screenshot
 keyboard.wait("esc")
+
+
+frequency = 300   # Set Frequency To 2500 Hertz
+duration = 250  # Set Duration To 1000 ms == 1 second
+winsound.Beep(frequency, duration)
 def on_click(x, y, button, pressed):
     if pressed:
         on_click.px = x
@@ -30,7 +36,7 @@ txt = str(pytesseract.image_to_string(img, lang = "eng")).replace("|", "I")
 txt.replace("‘", "'")
 txt = " ".join(txt.splitlines())
 print(txt)
-
+winsound.Beep(frequency, duration)
 keyboard = Controller()
 
 
@@ -38,6 +44,7 @@ keyboard = Controller()
 def on_press(key): 
 
     if key == Key.num_lock:
+        winsound.Beep(frequency, duration)
         for i in txt:
             keyboard.press(i)
             keyboard.release(i)
